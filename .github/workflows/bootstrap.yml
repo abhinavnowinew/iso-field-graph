@@ -3,7 +3,7 @@ name: Bootstrap ISO Field Graph
 on:
   push:
     paths:
-      - project-bootstrap.tar.gz
+      - project-bootstrap.tar.xz
 
 permissions:
   contents: write
@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Unpack project source
-        run: tar --no-same-owner --no-same-permissions -xzf project-bootstrap.tar.gz
+        run: tar --no-same-owner --no-same-permissions -xJf project-bootstrap.tar.xz
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
@@ -30,7 +30,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          rm project-bootstrap.tar.gz .github/workflows/bootstrap.yml
+          rm project-bootstrap.tar.xz .github/workflows/bootstrap.yml
           git add -A
           git commit -m 'Initialize ISO Field Graph and sanitized metadata'
           git push origin HEAD:main
